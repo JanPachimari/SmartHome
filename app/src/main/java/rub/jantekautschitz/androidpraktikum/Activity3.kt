@@ -18,7 +18,7 @@ import java.io.IOException
 class Activity3 : AppCompatActivity() {
 
     val client = OkHttpClient()
-    var antwort : String = "..."
+    var antwort : String = "..."    // Antwort auf http Request
     var tempGefuehlt : String = ""
     var tempAussen : String = ""
 
@@ -26,29 +26,29 @@ class Activity3 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_3)
 
-        Log.d("D", "onCreate wird aufgerufen")
-
+        // TextViews
         var textGefuehlt: TextView = findViewById(R.id.textGefuehlt)
         var textAussen: TextView = findViewById(R.id.textAussen)
 
+        // REST-Endpunkte
         val urlGefuehlt = "https://smarthome-imtm.iaw.ruhr-uni-bochum.de/rest/items/openweathermap_weather_and_forecast_7174e084_local_current_apparent_temperature"
         val urlAussen = "https://smarthome-imtm.iaw.ruhr-uni-bochum.de/rest/items/openweathermap_weather_and_forecast_7174e084_local_current_temperature"
 
         urlAbrufen(urlGefuehlt)
         Thread.sleep(750)
-        tempGefuehlt = antwort
+        tempGefuehlt = antwort          // frage gefühlte Außentemperatur ab, schreibe in TextView
         textGefuehlt.text = antwort
 
         urlAbrufen(urlAussen)
         Thread.sleep(750)
-        tempAussen = antwort
+        tempAussen = antwort            // frage tatsächliche Außentemperatur ab, schreibe in TextView
         textAussen.text = antwort
 
-        var shareButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.shareButton)
+        var shareButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.shareButton)   // Teilen-Button
         shareButton.setOnClickListener {
             val sharingIntent = Intent(Intent.ACTION_SEND)
             sharingIntent.type = "text/plain"
-            val shareBody = "Hallo!\nGerade haben wir ${tempAussen} Außentemperatur\nund gefühlte ${tempGefuehlt} Außentemperatur."
+            val shareBody = "Hallo!\nGerade haben wir ${tempAussen} Außentemperatur\nund gefühlte ${tempGefuehlt} Außentemperatur."     // Nachricht beim Teilen
             sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Aktuelles Wetter")
             sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
             startActivity(Intent.createChooser(sharingIntent, "Teilen via"))
@@ -63,24 +63,22 @@ class Activity3 : AppCompatActivity() {
 
     fun urlAbrufen(url : String) {
 
-        Log.d("D", "urlAbrufen wird aufgerufen")
-
-        val request = Request.Builder()
+        val request = Request.Builder()     // erstelle Request mit übergebener URL
             .url(url)
             .build()
 
-        client.newCall(request).enqueue(object : Callback {
+        client.newCall(request).enqueue(object : Callback {                 // führe Request aus
 
-            override fun onFailure(request: Request, e: IOException?) {
+            override fun onFailure(request: Request, e: IOException?) {     // keine Antwort erhalten
 
                 antwort = "Fehler bei der Anfrage"
             }
 
-            override fun onResponse(response: Response) {
+            override fun onResponse(response: Response) {                   // erfolgreich Antwort erhalten
 
                 val jsonString : String = response.body().string()
                 val result = jsonString.substringAfter("\"state\":\"").substringBefore('"')
-                antwort = result
+                antwort = result    // gebe ermittelten Temperaturwert zurück
 
             }
         })

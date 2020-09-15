@@ -52,9 +52,9 @@ class Activity2 : AppCompatActivity() {
             eingabe += "0"
             textView.text = textView.getText().toString() + "*"
             if (eingabe.length == 4) {
-                if(!pinExistiert)
+                if(!pinExistiert)           // es existiert kein Code, speichere neuen Code ab
                     savePin(eingabe)
-                else
+                else                        // es existiert bereits ein Code, vergleiche diesen mit Eingabe
                     eingabePruefen(pin, eingabe)
                 eingabe = ""
                 textView.text = ""
@@ -65,9 +65,9 @@ class Activity2 : AppCompatActivity() {
             eingabe += "1"
             textView.text = textView.getText().toString() + "*"
             if (eingabe.length == 4) {
-                if(!pinExistiert)
+                if(!pinExistiert)           // es existiert kein Code, speichere neuen Code ab
                     savePin(eingabe)
-                else
+                else                        // es existiert bereits ein Code, vergleiche diesen mit Eingabe
                     eingabePruefen(pin, eingabe)
                 eingabe = ""
                 textView.text = ""
@@ -78,9 +78,9 @@ class Activity2 : AppCompatActivity() {
             eingabe += "2"
             textView.text = textView.getText().toString() + "*"
             if (eingabe.length == 4) {
-                if(!pinExistiert)
+                if(!pinExistiert)           // es existiert kein Code, speichere neuen Code ab
                     savePin(eingabe)
-                else
+                else                        // es existiert bereits ein Code, vergleiche diesen mit Eingabe
                     eingabePruefen(pin, eingabe)
                 eingabe = ""
                 textView.text = ""
@@ -91,9 +91,9 @@ class Activity2 : AppCompatActivity() {
             eingabe += "3"
             textView.text = textView.getText().toString() + "*"
             if (eingabe.length == 4) {
-                if(!pinExistiert)
+                if(!pinExistiert)           // es existiert kein Code, speichere neuen Code ab
                     savePin(eingabe)
-                else
+                else                        // es existiert bereits ein Code, vergleiche diesen mit Eingabe
                     eingabePruefen(pin, eingabe)
                 eingabe = ""
                 textView.text = ""
@@ -104,9 +104,9 @@ class Activity2 : AppCompatActivity() {
             eingabe += "4"
             textView.text = textView.getText().toString() + "*"
             if (eingabe.length == 4) {
-                if(!pinExistiert)
+                if(!pinExistiert)           // es existiert kein Code, speichere neuen Code ab
                     savePin(eingabe)
-                else
+                else                        // es existiert bereits ein Code, vergleiche diesen mit Eingabe
                     eingabePruefen(pin, eingabe)
                 eingabe = ""
                 textView.text = ""
@@ -117,9 +117,9 @@ class Activity2 : AppCompatActivity() {
             eingabe += "5"
             textView.text = textView.getText().toString() + "*"
             if (eingabe.length == 4) {
-                if(!pinExistiert)
+                if(!pinExistiert)           // es existiert kein Code, speichere neuen Code ab
                     savePin(eingabe)
-                else
+                else                        // es existiert bereits ein Code, vergleiche diesen mit Eingabe
                     eingabePruefen(pin, eingabe)
                 eingabe = ""
                 textView.text = ""
@@ -130,9 +130,9 @@ class Activity2 : AppCompatActivity() {
             eingabe += "6"
             textView.text = textView.getText().toString() + "*"
             if (eingabe.length == 4) {
-                if(!pinExistiert)
+                if(!pinExistiert)           // es existiert kein Code, speichere neuen Code ab
                     savePin(eingabe)
-                else
+                else                        // es existiert bereits ein Code, vergleiche diesen mit Eingabe
                     eingabePruefen(pin, eingabe)
                 eingabe = ""
                 textView.text = ""
@@ -143,9 +143,9 @@ class Activity2 : AppCompatActivity() {
             eingabe += "7"
             textView.text = textView.getText().toString() + "*"
             if (eingabe.length == 4) {
-                if(!pinExistiert)
+                if(!pinExistiert)           // es existiert kein Code, speichere neuen Code ab
                     savePin(eingabe)
-                else
+                else                        // es existiert bereits ein Code, vergleiche diesen mit Eingabe
                     eingabePruefen(pin, eingabe)
                 eingabe = ""
                 textView.text = ""
@@ -156,9 +156,9 @@ class Activity2 : AppCompatActivity() {
             eingabe += "8"
             textView.text = textView.getText().toString() + "*"
             if (eingabe.length == 4) {
-                if(!pinExistiert)
+                if(!pinExistiert)           // es existiert kein Code, speichere neuen Code ab
                     savePin(eingabe)
-                else
+                else                        // es existiert bereits ein Code, vergleiche diesen mit Eingabe
                     eingabePruefen(pin, eingabe)
                 eingabe = ""
                 textView.text = ""
@@ -169,19 +169,14 @@ class Activity2 : AppCompatActivity() {
             eingabe += "9"
             textView.text = textView.getText().toString() + "*"
             if (eingabe.length == 4) {
-                if(!pinExistiert) {
+                if(!pinExistiert)           // es existiert kein Code, speichere neuen Code ab
                     savePin(eingabe)
-                    eingabe = ""
-                    textView.text = ""
-                }
-                else {
+                else                        // es existiert bereits ein Code, vergleiche diesen mit Eingabe
                     eingabePruefen(pin, eingabe)
-                    eingabe = ""
-                    textView.text = ""
-                }
+                eingabe = ""
+                textView.text = ""
             }
         }
-
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)        // Activity wird nach Unterbrechung fortgesetzt
