@@ -9,6 +9,7 @@ import android.os.FileObserver
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
@@ -29,6 +30,8 @@ class Activity5 : AppCompatActivity() {
 
         var hochladenButton : Button = findViewById<Button>(R.id.hochladenButton)
         var kameraButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.kameraButton)
+        var uploadMeldung : TextView = findViewById<TextView>(R.id.uploadMeldung)
+
         kameraButton.setOnClickListener {
             dispatchTakePictureIntent()
             Thread.sleep(1000)
@@ -36,8 +39,15 @@ class Activity5 : AppCompatActivity() {
         }
 
         hochladenButton.setOnClickListener {
+            uploadMeldung.text = "Foto wird hochgeladen."
             fotoHochladen(currentPhotoPath)
             hochladenButton.alpha = 0F
+        }
+
+        var weiterButton : Button = findViewById<Button>(R.id.weiterButton)
+        weiterButton.setOnClickListener {
+            val intent = Intent(this, Activity6::class.java)
+            startActivity(intent)
         }
 
     }
@@ -128,7 +138,6 @@ class Activity5 : AppCompatActivity() {
                 }
             }
         })
-
     }
 
     companion object {
