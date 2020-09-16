@@ -5,10 +5,17 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.os.FileObserver
 import android.provider.MediaStore
+import android.util.Log
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -20,11 +27,17 @@ class Activity5 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_5)
 
+        var hochladenButton : Button = findViewById<Button>(R.id.hochladenButton)
         var kameraButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.kameraButton)
         kameraButton.setOnClickListener {
-
             dispatchTakePictureIntent()
+            Thread.sleep(1000)
+            hochladenButton.alpha = 1.0F
+        }
 
+        hochladenButton.setOnClickListener {
+            fotoHochladen(currentPhotoPath)
+            hochladenButton.alpha = 0F
         }
 
     }
@@ -38,7 +51,7 @@ class Activity5 : AppCompatActivity() {
         val storageDir: File = this!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
         return File.createTempFile(
             "JPEG_${timeStamp}_", /* prefix */
-            ".jpg", /* suffix */
+            ".jpeg", /* suffix */
             storageDir /* directory */
         ).apply {
             // Save a file: path for use with ACTION_VIEW intents
@@ -68,14 +81,59 @@ class Activity5 : AppCompatActivity() {
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
-
-
-
                 }
             }
         }
     }
 
+    private fun fotoHochladen(currentPhotoPath: String) {
+
+        Log.d("Debug", "fotoHochladen aufgerufen")
+
+        var client = OkHttpClient() //.Builder()
+
+        val requestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("title", "Foto")
+            .addFormDataPart("image", "foto.jpeg",
+                File("${currentPhotoPath}").asRequestBody(MEDIA_TYPE_JPG))
+            .build()
+
+        val request = Request.Builder()
+            //.header("Authorization", "Client-ID $IMGUR_CLIENT_ID")
+            .url("https://android.iaw.ruhr-uni-bochum.de/photoUpload")
+            .post(requestBody)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+
+                Log.d("Debug", "Das Foto konnte nicht hochgeladen werden.")
+                e.printStackTrace()
+
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
+                    for ((name, value) in response.headers) {
+                        println("$name: $value")
+                    }
+
+                    println(response.body!!.string())
+
+                    Log.d("Debug", "Foto erfolgreich hochgeladen!")
+
+                }
+            }
+        })
+
+    }
+
+    companion object {
+        val MEDIA_TYPE_JPG = "image/jpeg".toMediaType()
+    }
 
     override fun onPause() {        // falls App pausiert, setze diese Activity als zuletzt benutzt
         super.onPause()
@@ -85,4 +143,5 @@ class Activity5 : AppCompatActivity() {
         editor.putString("lastActivity", javaClass.name)
         editor.commit()
     }
+
 }
