@@ -6,4 +6,90 @@
     android:layout_height="match_parent"
     tools:context=".Activity6">
 
+    <Button
+        android:id="@+id/routineSpeichern"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Routine speichern"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heimkino" />
+
+    <Switch
+        android:id="@+id/hauptschlafzimmer"
+        android:layout_width="261dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:text="Hauptschlafzimmer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/studio"
+        android:layout_width="261dp"
+        android:layout_height="50dp"
+        android:text="Studio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hauptschlafzimmer" />
+
+    <Switch
+        android:id="@+id/terrasse"
+        android:layout_width="261dp"
+        android:layout_height="50dp"
+        android:text="Terrasse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/studio" />
+
+    <Switch
+        android:id="@+id/garderobe"
+        android:layout_width="261dp"
+        android:layout_height="50dp"
+        android:text="Garderobe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/terrasse" />
+
+    <Switch
+        android:id="@+id/heimkino"
+        android:layout_width="261dp"
+        android:layout_height="50dp"
+        android:text="Heimkino"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/garderobe" />
+
+    <TextView
+        android:id="@+id/aktuelleRoutine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Aktuelle Routine:\n"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/routineSpeichern" />
+
+    <Button
+        android:id="@+id/routineAusfuehren"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Routine Ausführen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aktuelleRoutine" />
+
+    <Button
+        android:id="@+id/routineLoeschen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Routine Löschen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/routineAusfuehren" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
