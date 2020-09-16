@@ -84,8 +84,8 @@ class Activity4 : AppCompatActivity(), SensorEventListener {
         val client = OkHttpClient()
 
         val request = Request.Builder()
-            .url("https://smarthome-imtm.iaw.ruhr-uni-bochum.de/rest/items/GF_LivingRoom_Light/state")
-            .put(postBody.toRequestBody(MEDIA_TYPE_PLAIN))
+            .url("https://smarthome-imtm.iaw.ruhr-uni-bochum.de/rest/items/FF_MasterBedroom_Light")
+            .post(postBody.toRequestBody(MEDIA_TYPE_PLAIN))
             .build()
 
         client.newCall(request).enqueue(object : Callback {

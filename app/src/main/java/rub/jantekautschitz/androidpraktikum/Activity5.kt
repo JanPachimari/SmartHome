@@ -1,15 +1,22 @@
 package rub.jantekautschitz.androidpraktikum
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 
 class Activity5 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_5)
 
-
+        var kameraButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.kameraButton)
+        kameraButton.setOnClickListener {
+            val intent = Intent("android.media.action.IMAGE_CAPTURE")
+            startActivity(intent)
+        }
 
     }
 
