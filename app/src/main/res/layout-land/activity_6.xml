@@ -10,55 +10,55 @@
         android:id="@+id/routineSpeichern"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="100dp"
         android:text="Routine speichern"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heimkino" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
         android:id="@+id/hauptschlafzimmer"
         android:layout_width="261dp"
         android:layout_height="50dp"
+        android:layout_marginStart="100dp"
         android:text="Hauptschlafzimmer"
         app:layout_constraintBottom_toTopOf="@+id/studio"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Switch
         android:id="@+id/studio"
         android:layout_width="261dp"
         android:layout_height="50dp"
+        android:layout_marginStart="100dp"
         android:text="Studio"
         app:layout_constraintBottom_toTopOf="@+id/terrasse"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Switch
         android:id="@+id/terrasse"
         android:layout_width="261dp"
         android:layout_height="50dp"
+        android:layout_marginStart="100dp"
         android:text="Terrasse"
-        app:layout_constraintBottom_toTopOf="@+id/garderobe"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
         android:id="@+id/garderobe"
         android:layout_width="261dp"
         android:layout_height="50dp"
+        android:layout_marginStart="100dp"
         android:text="Garderobe"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/terrasse" />
 
     <Switch
         android:id="@+id/heimkino"
         android:layout_width="261dp"
         android:layout_height="50dp"
+        android:layout_marginStart="100dp"
         android:text="Heimkino"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/garderobe" />
 
@@ -66,9 +66,9 @@
         android:id="@+id/routineAusfuehren"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
         android:text="Routine Ausführen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/routineSpeichern" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
