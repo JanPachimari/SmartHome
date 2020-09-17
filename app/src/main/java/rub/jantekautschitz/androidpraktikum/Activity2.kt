@@ -193,7 +193,7 @@ class Activity2 : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
 
-            val intent = Intent(this, Activity3::class.java)    // falls Übereinstimmung, weiter
+            val intent = Intent(this, HomeActivity::class.java)    // falls Übereinstimmung, weiter
             startActivity(intent)
             finish()
 
@@ -218,7 +218,7 @@ class Activity2 : AppCompatActivity() {
             Toast.LENGTH_SHORT
         ).show()
 
-        val intent = Intent(this, Activity3::class.java)        // sobald gespeichert, wechsle in nächste Activity
+        val intent = Intent(this, HomeActivity::class.java)        // sobald gespeichert, wechsle in nächste Activity
         startActivity(intent)
         finish()
 

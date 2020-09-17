@@ -8,17 +8,25 @@ import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class Activity7 : AppCompatActivity() {
 
     var mNfcAdapter: NfcAdapter? = null
-    var nfcText: TextView = findViewById<TextView>(R.id.nfcText)
+    //var nfcText: TextView = findViewById<TextView>(R.id.nfcText)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_7)
 
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);       // NFC-Adapter
+        var homeButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.homeButton)
+        homeButton.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)     // zurück zum Hauptmenü
+            startActivity(intent)
+        }
+
+        /*m
+        NfcAdapter = NfcAdapter.getDefaultAdapter(this);       // NFC-Adapter
 
         if (mNfcAdapter == null) {
             Toast.makeText(this, "Dieses Gerät unterstützt NFC nicht.", Toast.LENGTH_LONG).show();
@@ -36,12 +44,13 @@ class Activity7 : AppCompatActivity() {
     private fun handleIntent(intent: Intent?) {
         if (intent != null) {
             if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
-                // TODO: process intent
+
             }
         }
         else {
             Log.d("NFC", "Fehler: Intent = null")
         }
+        */
     }
 
     override fun onPause() {        // falls App pausiert, setze diese Activity als zuletzt benutzt

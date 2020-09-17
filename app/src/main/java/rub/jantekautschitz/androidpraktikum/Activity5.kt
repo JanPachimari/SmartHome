@@ -44,12 +44,11 @@ class Activity5 : AppCompatActivity() {
             hochladenButton.alpha = 0F
         }
 
-        var weiterButton : Button = findViewById<Button>(R.id.weiterButton)     // Button zur nächster Activity
-        weiterButton.setOnClickListener {
-            val intent = Intent(this, Activity6::class.java)
+        var homeButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.homeButton)
+        homeButton.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)     // zurück zum Hauptmenü
             startActivity(intent)
         }
-
     }
 
     lateinit var currentPhotoPath : String      // späterer Dateipfad des Fotos

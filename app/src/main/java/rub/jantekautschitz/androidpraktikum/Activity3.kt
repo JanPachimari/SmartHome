@@ -54,9 +54,9 @@ class Activity3 : AppCompatActivity() {
             startActivity(Intent.createChooser(sharingIntent, "Teilen via"))
         }
 
-        var weiterButton : Button = findViewById<Button>(R.id.weiterButton)
-        weiterButton.setOnClickListener {
-            val intent = Intent(this, Activity4::class.java)        // Weiter-Button zu nächster Activity
+        var homeButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.homeButton)
+        homeButton.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)     // zurück zum Hauptmenü
             startActivity(intent)
         }
     }

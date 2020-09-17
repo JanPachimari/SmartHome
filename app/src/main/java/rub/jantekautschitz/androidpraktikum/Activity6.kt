@@ -10,6 +10,7 @@ import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -102,9 +103,9 @@ class Activity6 : AppCompatActivity() {
 
         }
 
-        var weiterButton : Button = findViewById<Button>(R.id.weiterButton)
-        weiterButton.setOnClickListener {
-            val intent = Intent(this, Activity7::class.java)
+        var homeButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.homeButton)
+        homeButton.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)     // zurück zum Hauptmenü
             startActivity(intent)
         }
     }

@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_4.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
@@ -43,9 +44,9 @@ class Activity4 : AppCompatActivity(), SensorEventListener {
             undoButton.alpha = 0.0F
         }
 
-        var weiterButton : Button = findViewById<Button>(R.id.weiterButton)  // Button zur nächsten Activity
-        weiterButton.setOnClickListener {
-            val intent = Intent(this, Activity5::class.java)
+        var homeButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.homeButton)
+        homeButton.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)     // zurück zum Hauptmenü
             startActivity(intent)
         }
     }
