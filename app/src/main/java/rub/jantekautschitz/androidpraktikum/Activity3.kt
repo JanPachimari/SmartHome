@@ -12,7 +12,10 @@ import com.squareup.okhttp.Callback
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.Response
+import kotlinx.android.synthetic.main.activity_3.*
 import java.io.IOException
+import kotlinx.serialization.*
+import kotlinx.serialization.json.*
 
 
 class Activity3 : AppCompatActivity() {
@@ -79,7 +82,6 @@ class Activity3 : AppCompatActivity() {
                 val jsonString : String = response.body().string()
                 val result = jsonString.substringAfter("\"state\":\"").substringBefore('"')
                 antwort = result    // gebe ermittelten Temperaturwert zurück
-
             }
         })
     }
