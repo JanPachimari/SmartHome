@@ -4,54 +4,44 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.squareup.okhttp.Callback
-import com.squareup.okhttp.OkHttpClient
-import com.squareup.okhttp.Request
-import com.squareup.okhttp.Response
-import kotlinx.android.synthetic.main.activity_3.*
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import okhttp3.*
 import java.io.IOException
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
 
 
 class Activity3 : AppCompatActivity() {
 
     val client = OkHttpClient()
     var antwort : String = "..."    // Antwort auf http Request
-    var tempGefuehlt : String = ""
-    var tempAussen : String = ""
+    var tempGefuehlt : String = "..."
+    var tempAussen : String = "..."
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_3)
 
-        // TextViews
-        var textGefuehlt: TextView = findViewById(R.id.textGefuehlt)
-        var textAussen: TextView = findViewById(R.id.textAussen)
+        @Serializable
+        data class Project(val state: String)
 
         // REST-Endpunkte
         val urlGefuehlt = "https://smarthome-imtm.iaw.ruhr-uni-bochum.de/rest/items/openweathermap_weather_and_forecast_7174e084_local_current_apparent_temperature"
         val urlAussen = "https://smarthome-imtm.iaw.ruhr-uni-bochum.de/rest/items/openweathermap_weather_and_forecast_7174e084_local_current_temperature"
 
-        urlAbrufen(urlGefuehlt)
-        Thread.sleep(750)
-        tempGefuehlt = antwort          // frage gefühlte Außentemperatur ab, schreibe in TextView
-        textGefuehlt.text = antwort
-
-        urlAbrufen(urlAussen)
-        Thread.sleep(750)
-        tempAussen = antwort            // frage tatsächliche Außentemperatur ab, schreibe in TextView
-        textAussen.text = antwort
+        var textGefuehlt : TextView = findViewById<TextView>(R.id.textGefuehlt)
+        var textAussen : TextView = findViewById<TextView>(R.id.textAussen)
 
         var shareButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.shareButton)   // Teilen-Button
         shareButton.setOnClickListener {
             val sharingIntent = Intent(Intent.ACTION_SEND)
             sharingIntent.type = "text/plain"                                                           // Nachricht beim Teilen
-            val shareBody = getString(R.string.msgBody1) + " ${tempAussen} " + getString(R.string.msgBody2) + " ${tempGefuehlt} " + getString(R.string.msgBody3)
+            val shareBody = getString(R.string.msgBody1) + " ${tempAussen} " + getString(R.string.msgBody2) + " ${tempGefuehlt} " + getString(
+                R.string.msgBody3
+            )
             sharingIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.aktuellesWetter))
             sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
             startActivity(Intent.createChooser(sharingIntent, getString(R.string.teilenVia)))
@@ -62,28 +52,42 @@ class Activity3 : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)     // zurück zum Hauptmenü
             startActivity(intent)
         }
-    }
 
-    fun urlAbrufen(url : String) {
+        fun urlAbrufen(url: String) {
 
-        val request = Request.Builder()     // erstelle Request mit übergebener URL
-            .url(url)
-            .build()
+            val request = Request.Builder()     // erstelle Request mit übergebener URL
+                .url(url)
+                .build()
 
-        client.newCall(request).enqueue(object : Callback {                 // führe Request aus
+            client.newCall(request).enqueue(object : Callback {
 
-            override fun onFailure(request: Request, e: IOException?) {     // keine Antwort erhalten
+                override fun onFailure(call: Call, e: IOException) {
 
-                antwort = getString(R.string.requestFehler)
-            }
+                    Log.d("Fehler", "Fehler")
 
-            override fun onResponse(response: Response) {                   // erfolgreich Antwort erhalten
+                }
 
-                val jsonString : String = response.body().string()
-                val result = jsonString.substringAfter("\"state\":\"").substringBefore('"')
-                antwort = result    // gebe ermittelten Temperaturwert zurück
-            }
-        })
+                override fun onResponse(call: Call, response: Response) {
+
+                    val jsonString = response.body?.string().toString()
+                    val obj =
+                        Json { ignoreUnknownKeys = true }.decodeFromString<Project>(jsonString)
+
+                    if (url == urlGefuehlt) {
+                        tempGefuehlt = obj.state
+                        Log.d("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", tempGefuehlt)
+                        runOnUiThread { textGefuehlt.text = obj.state }
+                    }
+                    if (url == urlAussen) {
+                        tempAussen = obj.state
+                        Log.d("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", tempAussen)
+                        runOnUiThread { textAussen.text = obj.state }
+                    }
+                }
+            })
+        }
+        urlAbrufen(urlGefuehlt)
+        urlAbrufen(urlAussen)
     }
 
     override fun onPause() {        // falls App pausiert, setze diese Activity als zuletzt benutzt

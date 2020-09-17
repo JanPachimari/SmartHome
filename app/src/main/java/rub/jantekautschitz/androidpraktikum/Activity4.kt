@@ -90,6 +90,7 @@ class Activity4 : AppCompatActivity(), SensorEventListener {
             .build()
 
         client.newCall(request).enqueue(object : Callback {
+
             override fun onFailure(call: Call, e: IOException) {        // Request fehlgeschlagen
                 e.printStackTrace()
             }
