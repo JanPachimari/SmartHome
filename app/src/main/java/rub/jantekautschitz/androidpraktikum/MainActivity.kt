@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             if (textInput.isEmpty()) {
                 Toast.makeText(
                     this@MainActivity,
-                    "Dieses Feld darf nicht leer sein.",
+                    getString(R.string.leeresFeld),
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
@@ -52,13 +52,13 @@ class MainActivity : AppCompatActivity() {
                 if (palindrom) {                         // Name ist ein Palindrom
                     Toast.makeText(
                         this@MainActivity,
-                        "Oh, ein Palindrom!",
+                        getString(R.string.palindrom),
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {                                  // Name ist kein Palindrom
                     Toast.makeText(
                         this@MainActivity,
-                        "${editText.getText().toString()} ist ein schöner Name.",
+                        "${editText.getText().toString()} " + getString(R.string.keinPalindrom),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

@@ -47,11 +47,11 @@ class Activity3 : AppCompatActivity() {
         var shareButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.shareButton)   // Teilen-Button
         shareButton.setOnClickListener {
             val sharingIntent = Intent(Intent.ACTION_SEND)
-            sharingIntent.type = "text/plain"
-            val shareBody = "Hallo!\nGerade haben wir ${tempAussen} Außentemperatur\nund gefühlte ${tempGefuehlt} Außentemperatur."     // Nachricht beim Teilen
-            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Aktuelles Wetter")
+            sharingIntent.type = "text/plain"                                                           // Nachricht beim Teilen
+            val shareBody = getString(R.string.msgBody1) + " ${tempAussen} " + getString(R.string.msgBody2) + " ${tempGefuehlt} " + getString(R.string.msgBody3)
+            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.aktuellesWetter))
             sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
-            startActivity(Intent.createChooser(sharingIntent, "Teilen via"))
+            startActivity(Intent.createChooser(sharingIntent, getString(R.string.teilenVia)))
         }
 
         var homeButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.homeButton)
@@ -71,7 +71,7 @@ class Activity3 : AppCompatActivity() {
 
             override fun onFailure(request: Request, e: IOException?) {     // keine Antwort erhalten
 
-                antwort = "Fehler bei der Anfrage"
+                antwort = getString(R.string.requestFehler)
             }
 
             override fun onResponse(response: Response) {                   // erfolgreich Antwort erhalten

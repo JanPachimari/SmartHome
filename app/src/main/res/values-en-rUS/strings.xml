@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android Lab Course</string>
+    <string name="title_activity_2">Activity2</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+
+    <!-- HomeActivity -->
+    <string name="homeTemperatur">Temperature</string>
+    <string name="homeHelligkeit">Light level</string>
+    <string name="homeFotoUpload">Photo upload</string>
+    <string name="homeLichtRoutine">Light preset</string>
+    <string name="homeNFC">NFC</string>
+    <string name="homeNamenAendern">Change name</string>
+
+    <!-- MainActivity -->
+    <string name="hallo">Hello!\nPlease enter your name.</string>
+    <string name="nameTextfeld">Name</string>
+    <string name="weiterButton">Continue</string>
+    <string name="palindrom">Oh, a palindrome!</string>
+    <string name="keinPalindrom">is a beautiful name.</string>
+    <string name="leeresFeld">This field must not be empty.</string>
+
+    <!-- Activity2 -->
+    <string name="loeschenButton">Delete</string>
+    <string name="nutzerNeu">You are new here.\nPlease select a secret code.</string>
+    <string name="nutzerBekannt">Welcome back!\nPlease enter your secret code.</string>
+    <string name="codeRichtig">Correct secret code!</string>
+    <string name="codeFalsch">Wrong secret code.\nPlease try again.</string>
+    <string name="codeGespeichert">Secret code saved successfully!</string>
+
+    <!-- Activity3 -->
+    <string name="tempGefuehlt">Current apparent local temperature:</string>
+    <string name="tempAussen">Current actual local temperature:</string>
+    <string name="aktuellesWetter">Current weather</string>
+    <string name="teilenVia">Share via</string>
+    <string name="requestFehler">Request Error</string>
+    <string name="msgBody1">Hello!\nCurrently we have</string>
+    <string name="msgBody2">local temperature\nand</string>
+    <string name="msgBody3">apparent local temperature.</string>
+
+    <!-- Activity4 -->
+    <string name="aktuelleHelligkeit">Current light level (lx):</string>
+    <string name="rueckgangigButton">Undo</string>
+    <string name="lichtWiederAus">The light was turned off again.</string>
+    <string name="lichtAn">The light was turned on.</string>
+
+    <!-- Activity5 -->
+    <string name="fotoAufnehmen">Take a photo:</string>
+    <string name="hochladenButton">Upload</string>
+    <string name="fotoWirdHochgeladen">Photo is uploading.</string>
+
+    <!-- Activity6 -->
+    <string name="raumHauptschlafzimmer">Master Bedroom</string>
+    <string name="raumStudio">Studio</string>
+    <string name="raumTerrasse">Terrace</string>
+    <string name="raumGarderobe">Wardrobe</string>
+    <string name="raumHeimkino">Home Cinema</string>
+    <string name="routineSpeichern">Save preset</string>
+    <string name="routineAusfuehren">Execute preset</string>
+    <string name="routineGespeichert">Preset saved!</string>
+
+</resources>

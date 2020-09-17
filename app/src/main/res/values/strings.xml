@@ -6,4 +6,60 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+
+    <!-- HomeActivity -->
+    <string name="homeTemperatur">Temperatur</string>
+    <string name="homeHelligkeit">Helligkeit</string>
+    <string name="homeFotoUpload">Foto-Upload</string>
+    <string name="homeLichtRoutine">Licht-Routine</string>
+    <string name="homeNFC">NFC</string>
+    <string name="homeNamenAendern">Namen ändern</string>
+
+    <!-- MainActivity -->
+    <string name="hallo">Hallo!\nBitte gib deinen Namen ein.</string>
+    <string name="nameTextfeld">Name</string>
+    <string name="weiterButton">Weiter</string>
+    <string name="palindrom">Oh, ein Palindrom!</string>
+    <string name="keinPalindrom">ist ein schöner Name.</string>
+    <string name="leeresFeld">Dieses Feld darf nicht leer sein.</string>
+
+    <!-- Activity2 -->
+    <string name="loeschenButton">Löschen</string>
+    <string name="nutzerNeu">Du bist neu hier.\nBitte wähle einen Zugangscode.</string>
+    <string name="nutzerBekannt">Willkommen zurück!\nBitte gib deinen Zugangscode ein.</string>
+    <string name="codeRichtig">Richtiger Zugangscode!</string>
+    <string name="codeFalsch">Falscher Zugangscode.\nBitte erneut versuchen.</string>
+    <string name="codeGespeichert">Zugangscode erfolgreich gespeichert!</string>
+
+    <!-- Activity3 -->
+    <string name="tempGefuehlt">Gefühlte Außentemperatur:</string>
+    <string name="tempAussen">Tatsächliche Außentemperatur:</string>
+    <string name="aktuellesWetter">Aktuelles Wetter</string>
+    <string name="teilenVia">Teilen via</string>
+    <string name="requestFehler">Fehler bei der Anfrage</string>
+    <string name="msgBody1">Hallo!\nGerade haben wir</string>
+    <string name="msgBody2">Außentemperatur\nund gefühlte</string>
+    <string name="msgBody3">Außentemperatur.</string>
+
+    <!-- Activity4 -->
+    <string name="aktuelleHelligkeit">Aktuelle Helligkeit (lx):</string>
+    <string name="rueckgangigButton">Rückgängig</string>
+    <string name="lichtWiederAus">Das Licht wurde wieder ausgeschaltet.</string>
+    <string name="lichtAn">Das Licht wurde eingeschaltet.</string>
+
+    <!-- Activity5 -->
+    <string name="fotoAufnehmen">Foto aufnehmen:</string>
+    <string name="hochladenButton">Hochladen</string>
+    <string name="fotoWirdHochgeladen">Foto wird hochgeladen.</string>
+
+    <!-- Activity6 -->
+    <string name="raumHauptschlafzimmer">Hauptschlafzimmer</string>
+    <string name="raumStudio">Studio</string>
+    <string name="raumTerrasse">Terrasse</string>
+    <string name="raumGarderobe">Garderobe</string>
+    <string name="raumHeimkino">Heimkino</string>
+    <string name="routineSpeichern">Routine speichern</string>
+    <string name="routineAusfuehren">Routine ausführen</string>
+    <string name="routineGespeichert">Routine gespeichert!</string>
+
 </resources>

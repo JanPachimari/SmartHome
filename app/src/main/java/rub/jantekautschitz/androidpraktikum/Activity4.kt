@@ -40,7 +40,7 @@ class Activity4 : AppCompatActivity(), SensorEventListener {
 
         undoButton.setOnClickListener {
             httpRequest("OFF")                  // sende Request, um Licht wieder auszuschalten
-            lichtNachricht.text = "Das Licht wurde wieder ausgeschaltet."
+            lichtNachricht.text = getString(R.string.lichtWiederAus)
             undoButton.alpha = 0.0F
         }
 
@@ -76,7 +76,7 @@ class Activity4 : AppCompatActivity(), SensorEventListener {
             val postBody = "ON"
             httpRequest(postBody)           // sende Request, um Licht einzuschalten
 
-            lichtNachricht.text = "Das Licht wurde eingeschaltet."
+            lichtNachricht.text = getString(R.string.lichtAn)
             undoButton.alpha = 1.0F
         }
     }

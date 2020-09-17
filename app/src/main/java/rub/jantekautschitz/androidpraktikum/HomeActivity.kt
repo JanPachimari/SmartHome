@@ -22,27 +22,27 @@ class HomeActivity : AppCompatActivity() {
         var imageView5: ImageView = findViewById<ImageView>(R.id.imageView5)
 
         imageView.setOnClickListener() {
-            val intent = Intent(this, Activity3::class.java)
+            val intent = Intent(this, Activity3::class.java)        // Button: Temperatur
             startActivity(intent)
         }
         imageView2.setOnClickListener() {
-            val intent = Intent(this, Activity4::class.java)
+            val intent = Intent(this, Activity4::class.java)        // Button: Helligkeit
             startActivity(intent)
         }
         imageView6.setOnClickListener() {
-            val intent = Intent(this, Activity5::class.java)
+            val intent = Intent(this, Activity5::class.java)        // Button: Foto-Upload
             startActivity(intent)
         }
         imageView3.setOnClickListener() {
-            val intent = Intent(this, Activity6::class.java)
+            val intent = Intent(this, Activity6::class.java)        // Button: Licht-Routine
             startActivity(intent)
         }
         imageView4.setOnClickListener() {
-            val intent = Intent(this, Activity7::class.java)
+            val intent = Intent(this, Activity7::class.java)        // Button: NFC
             startActivity(intent)
         }
         imageView5.setOnClickListener() {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)     // Button: Namen ändern
             startActivity(intent)
         }
     }

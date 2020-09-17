@@ -35,10 +35,10 @@ class Activity2 : AppCompatActivity() {
         var pinExistiert : Boolean = true
 
         if (pin.isNullOrEmpty()) {
-            textView2.text = "Du bist neu hier.\nBitte wähle einen Zugangscode."        // kein Code im Speicher vorhanden
+            textView2.text = getString(R.string.nutzerNeu)       // kein Code im Speicher vorhanden
             pinExistiert = false
         } else {
-            textView2.text = "Willkommen zurück!\nBitte gib deinen Zugangscode ein."   // Code bereits im Speicher vorhanden
+            textView2.text = getString(R.string.nutzerBekannt)   // Code bereits im Speicher vorhanden
         }
 
         var eingabe: String = ""    // Benutzereingabe
@@ -189,7 +189,7 @@ class Activity2 : AppCompatActivity() {
         if (eingabe == pin) {
             Toast.makeText(
                 this@Activity2,
-                "Richtiger Zugangscode!",
+                getString(R.string.codeRichtig),
                 Toast.LENGTH_SHORT
             ).show()
 
@@ -200,7 +200,7 @@ class Activity2 : AppCompatActivity() {
         } else {
             Toast.makeText(
                 this@Activity2,
-                "Falscher Zugangscode.\nBitte erneut versuchen.",       // keine Übereinstimmung, Fehlermeldung
+                getString(R.string.codeFalsch),     // keine Übereinstimmung, Fehlermeldung
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -214,7 +214,7 @@ class Activity2 : AppCompatActivity() {
 
         Toast.makeText(
             this@Activity2,
-            "Zugangscode erfolgreich gespeichert!",
+            getString(R.string.codeGespeichert),
             Toast.LENGTH_SHORT
         ).show()
 

@@ -32,6 +32,8 @@ class Activity5 : AppCompatActivity() {
         var kameraButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.kameraButton)
         var uploadMeldung : TextView = findViewById<TextView>(R.id.uploadMeldung)
 
+        hochladenButton.alpha = 0F
+
         kameraButton.setOnClickListener {                     // FloatingActionButton zum Starten der Kamera
             dispatchTakePictureIntent()
             Thread.sleep(1000)
@@ -39,7 +41,7 @@ class Activity5 : AppCompatActivity() {
         }
 
         hochladenButton.setOnClickListener {                  // Button zum Hochladen des aufgenommenen Fotos
-            uploadMeldung.text = "Foto wird hochgeladen."
+            uploadMeldung.text = getString(R.string.fotoWirdHochgeladen)
             fotoHochladen(currentPhotoPath)
             hochladenButton.alpha = 0F
         }

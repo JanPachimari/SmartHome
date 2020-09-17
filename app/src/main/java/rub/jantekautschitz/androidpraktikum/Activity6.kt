@@ -83,7 +83,7 @@ class Activity6 : AppCompatActivity() {
 
             Toast.makeText(
                 this@Activity6,
-                "Routine gespeichert!",
+                getString(R.string.routineGespeichert),
                 Toast.LENGTH_SHORT
             ).show()
         }
