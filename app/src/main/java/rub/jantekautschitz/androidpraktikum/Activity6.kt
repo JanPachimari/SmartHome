@@ -2,6 +2,7 @@ package rub.jantekautschitz.androidpraktikum
 
 import android.R.array
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -99,6 +100,12 @@ class Activity6 : AppCompatActivity() {
             if(gespeicherteRoutine.contains("heimkinoON")) httpRequest("GF_HomeCinema_Light", "ON")
             else httpRequest("GF_HomeCinema_Light", "OFF")
 
+        }
+
+        var weiterButton : Button = findViewById<Button>(R.id.weiterButton)
+        weiterButton.setOnClickListener {
+            val intent = Intent(this, Activity7::class.java)
+            startActivity(intent)
         }
     }
 

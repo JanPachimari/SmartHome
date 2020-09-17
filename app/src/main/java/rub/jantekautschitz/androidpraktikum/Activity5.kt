@@ -32,19 +32,19 @@ class Activity5 : AppCompatActivity() {
         var kameraButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.kameraButton)
         var uploadMeldung : TextView = findViewById<TextView>(R.id.uploadMeldung)
 
-        kameraButton.setOnClickListener {
+        kameraButton.setOnClickListener {                     // FloatingActionButton zum Starten der Kamera
             dispatchTakePictureIntent()
             Thread.sleep(1000)
             hochladenButton.alpha = 1.0F
         }
 
-        hochladenButton.setOnClickListener {
+        hochladenButton.setOnClickListener {                  // Button zum Hochladen des aufgenommenen Fotos
             uploadMeldung.text = "Foto wird hochgeladen."
             fotoHochladen(currentPhotoPath)
             hochladenButton.alpha = 0F
         }
 
-        var weiterButton : Button = findViewById<Button>(R.id.weiterButton)
+        var weiterButton : Button = findViewById<Button>(R.id.weiterButton)     // Button zur nächster Activity
         weiterButton.setOnClickListener {
             val intent = Intent(this, Activity6::class.java)
             startActivity(intent)
@@ -52,19 +52,19 @@ class Activity5 : AppCompatActivity() {
 
     }
 
-    lateinit var currentPhotoPath : String
+    lateinit var currentPhotoPath : String      // späterer Dateipfad des Fotos
 
     @Throws(IOException::class)
     private fun createImageFile(): File {
-        // Create an image file name
+                                                // erstelle Dateiname des Bildes
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File = this!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
         return File.createTempFile(
-            "JPEG_${timeStamp}_", /* prefix */
-            ".jpeg", /* suffix */
-            storageDir /* directory */
+            "JPEG_${timeStamp}_",               /* Präfix */
+            ".jpeg",                            /* Suffix */
+            storageDir                               /* Dateipfad */
         ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
+                                                // speichere die Datei
             currentPhotoPath = absolutePath
         }
     }
@@ -73,16 +73,16 @@ class Activity5 : AppCompatActivity() {
 
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            // Ensure that there's a camera activity to handle the intent
+                                                // Kamera-Activity zum Bearbeiten des Intents
             takePictureIntent.resolveActivity(packageManager)?.also {
-                // Create the File where the photo should go
+                                                // erstelle Datei am Zielort des Fotos
                 val photoFile: File? = try {
                     createImageFile()
                 } catch (ex: IOException) {
-                    // Error occurred while creating the File
+                                                // Fehler beim Erstellen der Datei
                     null
                 }
-                // Continue only if the File was successfully created
+                                                // gehe nur weiter, falls Datei erfolgreich erstellt wurde
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                         this,
@@ -98,41 +98,38 @@ class Activity5 : AppCompatActivity() {
 
     private fun fotoHochladen(currentPhotoPath: String) {
 
-        Log.d("Debug", "fotoHochladen aufgerufen")
-
-        var client = OkHttpClient() //.Builder()
+        var client = OkHttpClient()
 
         val requestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
             .addFormDataPart("title", "Foto")
             .addFormDataPart("image", "foto.jpeg",
-                File("${currentPhotoPath}").asRequestBody(MEDIA_TYPE_JPG))
+                File("${currentPhotoPath}").asRequestBody(MEDIA_TYPE_JPG))      // sende als Bild
             .build()
 
         val request = Request.Builder()
             //.header("Authorization", "Client-ID $IMGUR_CLIENT_ID")
-            .url("https://android.iaw.ruhr-uni-bochum.de/photoUpload")
+            .url("https://android.iaw.ruhr-uni-bochum.de/photoUpload")      // URL
             .post(requestBody)
             .build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
 
-                Log.d("Debug", "Das Foto konnte nicht hochgeladen werden.")
+                Log.d("Debug", "Das Foto konnte nicht hochgeladen werden.")         // Request fehlgeschlagen
                 e.printStackTrace()
 
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")      // keine Response erhalten
 
                     for ((name, value) in response.headers) {
                         println("$name: $value")
                     }
 
-                    println(response.body!!.string())
-
+                    println(response.body!!.string())                                               // sende Response
                     Log.d("Debug", "Foto erfolgreich hochgeladen!")
 
                 }
@@ -141,7 +138,7 @@ class Activity5 : AppCompatActivity() {
     }
 
     companion object {
-        val MEDIA_TYPE_JPG = "image/jpeg".toMediaType()
+        val MEDIA_TYPE_JPG = "image/jpeg".toMediaType()         // MediaType: JPEG-Datei
     }
 
     override fun onPause() {        // falls App pausiert, setze diese Activity als zuletzt benutzt

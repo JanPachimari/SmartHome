@@ -38,12 +38,12 @@ class Activity4 : AppCompatActivity(), SensorEventListener {
         undoButton.alpha = 0.0F
 
         undoButton.setOnClickListener {
-            httpRequest("OFF")
+            httpRequest("OFF")                  // sende Request, um Licht wieder auszuschalten
             lichtNachricht.text = "Das Licht wurde wieder ausgeschaltet."
             undoButton.alpha = 0.0F
         }
 
-        var weiterButton : Button = findViewById<Button>(R.id.weiterButton)
+        var weiterButton : Button = findViewById<Button>(R.id.weiterButton)  // Button zur nächsten Activity
         weiterButton.setOnClickListener {
             val intent = Intent(this, Activity5::class.java)
             startActivity(intent)
@@ -73,7 +73,7 @@ class Activity4 : AppCompatActivity(), SensorEventListener {
             Log.d("D", "Licht ist kleiner als Grenzwert")
 
             val postBody = "ON"
-            httpRequest(postBody)
+            httpRequest(postBody)           // sende Request, um Licht einzuschalten
 
             lichtNachricht.text = "Das Licht wurde eingeschaltet."
             undoButton.alpha = 1.0F
@@ -84,24 +84,24 @@ class Activity4 : AppCompatActivity(), SensorEventListener {
         val client = OkHttpClient()
 
         val request = Request.Builder()
-            .url("https://smarthome-imtm.iaw.ruhr-uni-bochum.de/rest/items/FF_MasterBedroom_Light")
+            .url("https://smarthome-imtm.iaw.ruhr-uni-bochum.de/rest/items/FF_MasterBedroom_Light")     // Licht im Hauptschlafzimmer
             .post(postBody.toRequestBody(MEDIA_TYPE_PLAIN))
             .build()
 
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
+            override fun onFailure(call: Call, e: IOException) {        // Request fehlgeschlagen
                 e.printStackTrace()
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")      // keine Reponse erhalten
 
                     for ((name, value) in response.headers) {
                         println("$name: $value")
                     }
 
-                    println(response.body!!.string())
+                    println(response.body!!.string())       // gebe Response aus
                 }
             }
         })
