@@ -26,6 +26,8 @@ class Activity7 : AppCompatActivity() {
     var mAdapter: NfcAdapter? = null                    // NFC-Adapter
     var mPendingIntent: PendingIntent? = null
 
+    var wurdeAusgemacht: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_7)
@@ -60,6 +62,14 @@ class Activity7 : AppCompatActivity() {
         clearButton.setOnClickListener {
             textEingabe.setText("")
         }
+
+        var undoButton : Button = findViewById<Button>(R.id.undoButton)
+        undoButton.setOnClickListener {
+            undoButton.isEnabled = false
+            if (wurdeAusgemacht) httpRequest("FF_MasterBedroom_Light", "ON")
+            else httpRequest("FF_MasterBedroom_Light", "OFF")
+        }
+
     }
 
     override fun onNewIntent(intent: Intent?) {          // NFC-Tag entdeckt, neuer Intent
@@ -138,10 +148,16 @@ class Activity7 : AppCompatActivity() {
 
     private fun sendeBefehl(text: String) {
         var text2 = text.toUpperCase()
-        if (text2.contains("HAUPTSCHLAFZIMMER AN") || text2.contains("MASTER BEDROOM ON"))
+        if (text2.contains("HAUPTSCHLAFZIMMER AN") || text2.contains("MASTER BEDROOM ON")) {
             httpRequest("FF_MasterBedroom_Light", "ON")
-        if (text2.contains("HAUPTSCHLAFZIMMER AUS") || text2.contains("MASTER BEDROOM OFF"))
+            findViewById<Button>(R.id.undoButton).isEnabled = true
+            wurdeAusgemacht = false
+        }
+        if (text2.contains("HAUPTSCHLAFZIMMER AUS") || text2.contains("MASTER BEDROOM OFF")) {
             httpRequest("FF_MasterBedroom_Light", "OFF")
+            findViewById<Button>(R.id.undoButton).isEnabled = true
+            wurdeAusgemacht = true
+        }
     }
 
     private fun httpRequest(raum: String, postBody: String) {
