@@ -1,19 +1,20 @@
 package rub.jantekautschitz.androidpraktikum
 
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.nfc.NfcAdapter
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
+
 class Activity7 : AppCompatActivity() {
 
-    var mNfcAdapter: NfcAdapter? = null
-    //var nfcText: TextView = findViewById<TextView>(R.id.nfcText)
+    var mAdapter: NfcAdapter? = null
+    var mPendingIntent: PendingIntent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,32 +26,33 @@ class Activity7 : AppCompatActivity() {
             startActivity(intent)
         }
 
-        /*m
-        NfcAdapter = NfcAdapter.getDefaultAdapter(this);       // NFC-Adapter
-
-        if (mNfcAdapter == null) {
-            Toast.makeText(this, "Dieses Gerät unterstützt NFC nicht.", Toast.LENGTH_LONG).show();
-            finish();                           // beende Activity, falls Gerät NFC nicht unterstützt
-            return;
+        mAdapter = NfcAdapter.getDefaultAdapter(this)
+        if (mAdapter == null) {
+            // Gerät unterstützt kein NFC
+            return
         }
-
-        if (!mNfcAdapter!!.isEnabled()) {       // NFC ist auf dem Gerät nicht eingeschaltet
-            nfcText.text="NFC ist ausgeschaltet."
-        }
-
-        handleIntent(getIntent());
+        mPendingIntent = PendingIntent.getActivity(
+            this, 0, Intent(
+                this,
+                javaClass
+            ).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0
+        )
     }
 
-    private fun handleIntent(intent: Intent?) {
-        if (intent != null) {
-            if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        var tag: Tag = intent?.getParcelableExtra(NfcAdapter.EXTRA_TAG)!!
+        getDataFromTag(tag, intent)
+    }
 
-            }
-        }
-        else {
-            Log.d("NFC", "Fehler: Intent = null")
-        }
-        */
+    fun getDataFromTag(tag: Tag, intent: Intent) {
+        Log.d("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC", tag.toString())
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mAdapter?.enableForegroundDispatch(this, mPendingIntent, null, null);
     }
 
     override fun onPause() {        // falls App pausiert, setze diese Activity als zuletzt benutzt
@@ -60,6 +62,8 @@ class Activity7 : AppCompatActivity() {
         val editor = prefs.edit()
         editor.putString("lastActivity", javaClass.name)
         editor.commit()
+
+        mAdapter?.disableForegroundDispatch(this)
     }
 
 

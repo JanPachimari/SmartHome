@@ -12,6 +12,7 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+    <uses-feature android:name="android.hardware.nfc"/>
 
     <application
         android:allowBackup="true"
@@ -21,7 +22,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".HomeActivity"></activity>
-        <activity android:name=".Activity7" />
+        <activity android:name=".Activity7">
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".Activity6" />
         <activity android:name=".Activity5" />
         <activity android:name=".Activity4" />
@@ -40,7 +46,6 @@
         -->
         <activity android:name=".MainActivity">
             <intent-filter>
-
                 <!--
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

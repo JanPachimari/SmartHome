@@ -60,7 +60,7 @@
     <string name="raumGarderobe">Wardrobe</string>
     <string name="raumHeimkino">Home Cinema</string>
     <string name="routineSpeichern">Save preset</string>
-    <string name="routineAusfuehren">Execute preset</string>
+    <string name="routineAusfuehren">Run preset</string>
     <string name="routineGespeichert">Preset saved!</string>
 
 </resources>
