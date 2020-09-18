@@ -16,6 +16,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import okhttp3.*
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.IOException
 
 
 class Activity7 : AppCompatActivity() {
@@ -119,6 +122,9 @@ class Activity7 : AppCompatActivity() {
                 )
                     .show()
                 ndef.close()
+
+                sendeBefehl(text)
+
             }
         } catch (e: Exception) {                   // Fehler beim Lesen des NFC-Tags
             Toast.makeText(
@@ -128,6 +134,42 @@ class Activity7 : AppCompatActivity() {
             )
                 .show()
         }
+    }
+
+    private fun sendeBefehl(text: String) {
+        var text2 = text.toUpperCase()
+        if (text2.contains("HAUPTSCHLAFZIMMER AN") || text2.contains("MASTER BEDROOM ON"))
+            httpRequest("FF_MasterBedroom_Light", "ON")
+        if (text2.contains("HAUPTSCHLAFZIMMER AUS") || text2.contains("MASTER BEDROOM OFF"))
+            httpRequest("FF_MasterBedroom_Light", "OFF")
+    }
+
+    private fun httpRequest(raum: String, postBody: String) {
+        val client = OkHttpClient()
+        var url : String = "https://smarthome-imtm.iaw.ruhr-uni-bochum.de/rest/items/"      // REST-Endpunkt
+
+        val request = Request.Builder()
+            .url(url + raum)
+            .post(postBody.toRequestBody(Activity6.MEDIA_TYPE_PLAIN))
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {                    // Request fehlgeschlagen
+                e.printStackTrace()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")      // Antwort nicht erfolgreich
+
+                    for ((name, value) in response.headers) {                                       // Antwort erfolgreich
+                        println("$name: $value")
+                    }
+
+                    println(response.body!!.string())       // gebe Antwort in Konsole aus
+                }
+            }
+        })
     }
 
     override fun onResume() {

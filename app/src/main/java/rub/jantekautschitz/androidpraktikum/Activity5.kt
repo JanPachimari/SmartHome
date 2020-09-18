@@ -32,12 +32,14 @@ class Activity5 : AppCompatActivity() {
         var kameraButton : FloatingActionButton = findViewById<FloatingActionButton>(R.id.kameraButton)
         var uploadMeldung : TextView = findViewById<TextView>(R.id.uploadMeldung)
 
+        hochladenButton.isEnabled = false
         hochladenButton.alpha = 0F
 
         kameraButton.setOnClickListener {                     // FloatingActionButton zum Starten der Kamera
             dispatchTakePictureIntent()
             Thread.sleep(1000)
             hochladenButton.alpha = 1.0F
+            hochladenButton.isEnabled = true
         }
 
         hochladenButton.setOnClickListener {                  // Button zum Hochladen des aufgenommenen Fotos
@@ -110,7 +112,6 @@ class Activity5 : AppCompatActivity() {
             .build()
 
         val request = Request.Builder()
-            //.header("Authorization", "Client-ID $IMGUR_CLIENT_ID")
             .url("https://android.iaw.ruhr-uni-bochum.de/photoUpload")      // URL
             .post(requestBody)
             .build()

@@ -70,5 +70,6 @@
     <string name="writeSuccess">Auf NFC-Tag gespeichert!</string>
     <string name="keinNFC">Dein Gerät unterstützt kein NFC.</string>
     <string name="leseFehler">Tag konnte nicht gelesen werden.</string>
+    <string name="beispiele"><b>Zum Beispiel:</b>\nHauptschlafzimmer AN\nHauptschlafzimmer AUS</string>
 
 </resources>
