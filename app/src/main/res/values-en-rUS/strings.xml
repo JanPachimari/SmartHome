@@ -25,7 +25,7 @@
     <string name="leeresFeld">This field must not be empty.</string>
 
     <!-- Activity2 -->
-    <string name="loeschenButton">Delete</string>
+    <string name="loeschenButton">Clear</string>
     <string name="nutzerNeu">You are new here.\nPlease select a secret code.</string>
     <string name="nutzerBekannt">Welcome back!\nPlease enter your secret code.</string>
     <string name="codeRichtig">Correct secret code!</string>
@@ -62,5 +62,14 @@
     <string name="routineSpeichern">Save preset</string>
     <string name="routineAusfuehren">Run preset</string>
     <string name="routineGespeichert">Preset saved!</string>
+
+    <!-- Activity7 -->
+    <string name="aufTagSchreiben">Auf Tag schreiben</string>
+    <string name="NFCverbinden">Please connect NFC device</string>
+    <string name="anleitung1">Empty text field = <b><font fgcolor='#0cbd24'>READ</font></b></string>
+    <string name="anleitung2">Filled text field = <b><font fgcolor='#ce3611'>WRITE</font></b></string>
+    <string name="writeSuccess">Saved to NFC tag!</string>
+    <string name="keinNFC">NFC is not supported by your device.</string>
+    <string name="leseFehler">Could not read tag.</string>
 
 </resources>

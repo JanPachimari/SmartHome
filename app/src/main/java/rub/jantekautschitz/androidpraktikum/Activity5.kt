@@ -81,6 +81,7 @@ class Activity5 : AppCompatActivity() {
                     createImageFile()
                 } catch (ex: IOException) {
                                                 // Fehler beim Erstellen der Datei
+                    Log.d("Debug", ex.toString())
                     null
                 }
                                                 // gehe nur weiter, falls Datei erfolgreich erstellt wurde

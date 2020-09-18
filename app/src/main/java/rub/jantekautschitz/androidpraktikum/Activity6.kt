@@ -44,31 +44,31 @@ class Activity6 : AppCompatActivity() {
         routineSpeichern.setOnClickListener {
 
             gespeicherteRoutine = ""
-            if (hauptschlafzimmer.isChecked()) {
+            if (hauptschlafzimmer.isChecked()) {                // Hauptschlafzimmer
                 gespeicherteRoutine += "hauptschlafzimmerON"
             }
             else {
                 gespeicherteRoutine += "hauptschlafzimmerOFF"
             }
-            if (studio.isChecked()) {
+            if (studio.isChecked()) {                           // Studio
                 gespeicherteRoutine += "studioON"
             }
             else {
                 gespeicherteRoutine += "studioOFF"
             }
-            if (terrasse.isChecked()) {
+            if (terrasse.isChecked()) {                         // Terrasse
                 gespeicherteRoutine += "terrasseON"
             }
             else {
                 gespeicherteRoutine += "terrasseOFF"
             }
-            if (garderobe.isChecked()) {
+            if (garderobe.isChecked()) {                        // Garderobe
                 gespeicherteRoutine += "garderobeON"
             }
             else {
                 gespeicherteRoutine += "garderobeOFF"
             }
-            if (heimkino.isChecked()) {
+            if (heimkino.isChecked()) {                         // Heimkino
                 gespeicherteRoutine += "heimkinoON"
             }
             else {
@@ -90,15 +90,15 @@ class Activity6 : AppCompatActivity() {
 
         routineAusfuehren.setOnClickListener {
 
-            if(gespeicherteRoutine.contains("hauptschlafzimmerON")) httpRequest("FF_MasterBedroom_Light", "ON")
+            if(gespeicherteRoutine.contains("hauptschlafzimmerON")) httpRequest("FF_MasterBedroom_Light", "ON")     // Hauptschlafzimmer
             else httpRequest("FF_MasterBedroom_Light", "OFF")
-            if(gespeicherteRoutine.contains("studioON")) httpRequest("AT_Studio_Light", "ON")
+            if(gespeicherteRoutine.contains("studioON")) httpRequest("AT_Studio_Light", "ON")                       // Studio
             else httpRequest("AT_Studio_Light", "OFF")
-            if(gespeicherteRoutine.contains("terrasseON")) httpRequest("OU_Terrace_Light", "ON")
+            if(gespeicherteRoutine.contains("terrasseON")) httpRequest("OU_Terrace_Light", "ON")                    // Terrasse
             else httpRequest("OU_Terrace_Light", "OFF")
-            if(gespeicherteRoutine.contains("garderobeON")) httpRequest("GF_Wardrobe_Light", "ON")
+            if(gespeicherteRoutine.contains("garderobeON")) httpRequest("GF_Wardrobe_Light", "ON")                  // Garderobe
             else httpRequest("GF_Wardrobe_Light", "OFF")
-            if(gespeicherteRoutine.contains("heimkinoON")) httpRequest("GF_HomeCinema_Light", "ON")
+            if(gespeicherteRoutine.contains("heimkinoON")) httpRequest("GF_HomeCinema_Light", "ON")                 // Heimkino
             else httpRequest("GF_HomeCinema_Light", "OFF")
 
         }
@@ -113,7 +113,7 @@ class Activity6 : AppCompatActivity() {
     private fun httpRequest(raum: String, postBody: String) {
 
         val client = OkHttpClient()
-        var url : String = "https://smarthome-imtm.iaw.ruhr-uni-bochum.de/rest/items/"
+        var url : String = "https://smarthome-imtm.iaw.ruhr-uni-bochum.de/rest/items/"      // REST-Endpunkt
 
         val request = Request.Builder()
             .url(url + raum)
@@ -121,19 +121,19 @@ class Activity6 : AppCompatActivity() {
             .build()
 
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
+            override fun onFailure(call: Call, e: IOException) {                    // Request fehlgeschlagen
                 e.printStackTrace()
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")      // Antwort nicht erfolgreich
 
-                    for ((name, value) in response.headers) {
+                    for ((name, value) in response.headers) {                                       // Antwort erfolgreich
                         println("$name: $value")
                     }
 
-                    println(response.body!!.string())
+                    println(response.body!!.string())       // gebe Antwort in Konsole aus
                 }
             }
         })
@@ -141,7 +141,7 @@ class Activity6 : AppCompatActivity() {
     }
 
     companion object {
-        val MEDIA_TYPE_PLAIN = "text/plain; charset=utf-8".toMediaType()
+        val MEDIA_TYPE_PLAIN = "text/plain; charset=utf-8".toMediaType()        // MediaType: einfacher Text
     }
 
     override fun onPause() {        // falls App pausiert, setze diese Activity als zuletzt benutzt

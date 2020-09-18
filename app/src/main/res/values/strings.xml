@@ -24,7 +24,7 @@
     <string name="leeresFeld">Dieses Feld darf nicht leer sein.</string>
 
     <!-- Activity2 -->
-    <string name="loeschenButton">Löschen</string>
+    <string name="loeschenButton">Eingabe löschen</string>
     <string name="nutzerNeu">Du bist neu hier.\nBitte wähle einen Zugangscode.</string>
     <string name="nutzerBekannt">Willkommen zurück!\nBitte gib deinen Zugangscode ein.</string>
     <string name="codeRichtig">Richtiger Zugangscode!</string>
@@ -61,5 +61,14 @@
     <string name="routineSpeichern">Routine speichern</string>
     <string name="routineAusfuehren">Routine ausführen</string>
     <string name="routineGespeichert">Routine gespeichert!</string>
+
+    <!-- Activity7 -->
+    <string name="aufTagSchreiben">Auf Tag schreiben</string>
+    <string name="NFCverbinden">Bitte NFC-Gerät anlegen</string>
+    <string name="anleitung1">Textfeld leer lassen zum <b><font fgcolor='#0cbd24'>LESEN</font></b></string>
+    <string name="anleitung2">Textfeld füllen zum <b><font fgcolor='#ce3611'>SCHREIBEN</font></b></string>
+    <string name="writeSuccess">Auf NFC-Tag gespeichert!</string>
+    <string name="keinNFC">Dein Gerät unterstützt kein NFC.</string>
+    <string name="leseFehler">Tag konnte nicht gelesen werden.</string>
 
 </resources>
