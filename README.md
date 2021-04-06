@@ -1,6 +1,6 @@
 <h2>PROTOTYPE: Smart Home App for Android</h2>
 
-<h3>This is an example mobile application for a smart home, written in Kotlin as part of the Android Lab Course of 2020.</h3>
+<h3>This is an example mobile app for a smart home, written in Kotlin as part of the Android Lab Course of 2020.</h3>
 <h3>Example usages:</h3>
 
 - Use HTTP requests to get current local and apparent temperatures from a REST endpoint, and display them on the device.
